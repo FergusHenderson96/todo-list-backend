@@ -13,9 +13,18 @@ exports.addList = async (req, res) => {
 
   exports.deleteList = async (req, res) => {
     try {
-      const list = await Post.findByIdAndDelete(req.params.id);
+      const list = await List.findByIdAndDelete(req.params.id);
       res.status(200).send(list);
     } catch (error) {
       res.status(404).send({ message: "list not found" });
     }
   };
+
+  exports.getUserlist = async (req,  res) => {
+    try {
+      const list = await List.find(req.params.id);
+
+    }catch (error) {
+      res.status(404).send({message: " you have no list yet"});
+    }
+  }
