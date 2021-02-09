@@ -7,10 +7,13 @@ exports.getMyProfile = async (req, res) => {
     //this function adds a user to the database
     try {
       const user = new User(req.body);
+      //adds details from User/models Schema
       const savedUser = await user.save();
+      //saves user
       console.log(req.body);
+      //logs the details
       res.status(201).send({savedUser});
-      //({savedUser: savedUser})
+      //({savedUser: savedUser}) 
     } catch (error) {
       if(error.code === 11000) {
         res.status(400).send({ message: "User already exists" });
@@ -45,6 +48,7 @@ exports.getMyProfile = async (req, res) => {
   };
   
   exports.login = async (req, res) => {
+      //this function logs in user by 
     try {
       const user = await User.findByCredentials(req.body.email, req.body.password);
       res.status(200).send({user});
